@@ -1,0 +1,22 @@
+{% include 'base.html' %}
+{% load custom_filters %}
+{% block content %}
+
+<div class="container">
+    <h2>Success!</h2>
+    <p>Your form was submitted successfully.</p>
+
+    <h3>Selected Parties:</h3>
+    <ul>
+        
+        {% with party=party_id|get_by_id:selected_parties %}
+            {% for party in selected_parties %}        
+                <li>{{ party.partyid }}: {{ party.partyname }}</li>
+            {% endfor %}        
+        {% endwith %}
+        
+
+    </ul>
+</div>
+
+{% endblock content %}

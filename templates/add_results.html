@@ -1,0 +1,20 @@
+{% include 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+
+    <h2 class="fw-bold m-4">Add Results for {{ polling_unit }}</h2>
+
+
+    <form method="post" class="fw-bold m-4" action="{% url 'add_results' polling_unit_id=polling_unit.polling_unit_id %}">
+        {% csrf_token %}
+        
+        {{ form.as_p }}
+    
+        <button type="submit" class="btn btn-danger">Submit</button>
+    </form>
+
+</div>
+
+{% endblock content %}

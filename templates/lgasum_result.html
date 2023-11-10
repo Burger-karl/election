@@ -1,0 +1,47 @@
+{% include 'base.html' %}
+
+{% block content %}
+
+
+<div class="container">
+
+    <h2 class="fw-bold m-4">Select Local Government:</h2>
+    <form method="get" action="" class="fw-bold m-4">
+        <select name="lga">
+            <option value="" {% if not selected_lga %}selected{% endif %}>Select Local Government</option>
+            {% for lga in lgas %}
+                <option value="{{ lga.lga_id }}" {% if selected_lga and selected_lga.lga_id == lga.lga_id %}selected{% endif %}>{{ lga.lga_name }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" class="btn btn-danger" value="Submit">
+    </form>
+
+    {% if selected_lga %}
+        <h2 class="fw-bold m-4">Result for {{ selected_lga.lga_name }}:</h2>
+        {% if polling_units %}
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Polling Unit ID</th>
+                        <th>Polling Unit Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for unit in polling_units %}
+                        <tr>
+                            <td>{{ unit.polling_unit_id }}</td>
+                            <td>{{ unit.polling_unit_name }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <p class="fw-bold m-4">Total Votes: {{ total_votes }}</p>
+        {% else %}
+            <p>No polling units found for the selected local government.</p>
+        {% endif %}
+    {% endif %}
+
+  
+</div>
+
+{% endblock content %}
